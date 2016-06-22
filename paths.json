@@ -1,0 +1,4 @@
+[
+	"/var/log/apache2/",
+	"/var/www/html/application/logs/"
+]
