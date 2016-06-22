@@ -2,6 +2,8 @@ var spawn = require('child_process').spawn;
 var fs = require('fs');
 
 
+process.chdir(__dirname);
+
 var folders = require('./paths.json');
 var args = ['-f'];
 folders.forEach(function(d) {
@@ -42,13 +44,13 @@ tail.stdout.on('data', function(data) {
     }
 
     fs.readdir('.', function(err, files) {
-      console.log(files);
+      //console.log(files);
       files.forEach(function(f) {
         if (f.indexOf('.json') > 0) {
           var t = parseInt(f.split('.')[1]);
           if (t < (time - 5000)) {
             fs.unlinkSync(f);
-            console.log('remove: ' + f);
+            //console.log('remove: ' + f);
           }
         }
       });
@@ -57,5 +59,5 @@ tail.stdout.on('data', function(data) {
   });
 
 
-  console.log(data.toString());
+  //console.log(data.toString());
 });
