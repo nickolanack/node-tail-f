@@ -1,5 +1,37 @@
 var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
 var fs = require('fs');
+
+
+
+/**
+ * kill any currently running instances, and take over
+ */
+var pids = require('./pids.json');
+while (pids.length) {
+  var pid = pids.shift();
+  exec('kill -9 ' + pid, function(err, stdout, stderr) {
+
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    console.log(stdout);
+    console.log(stderr);
+
+  });
+}
+
+/**
+ * store pid for next process to cleanup.
+ */
+fs.writeFile("pids.json", JSON.stringify([process.pid]), function(err) {
+  if (err) {
+    console.log(err);
+  }
+});
+
 
 
 process.chdir(__dirname);
