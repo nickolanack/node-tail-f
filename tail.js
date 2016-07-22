@@ -3,7 +3,7 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 
 
-
+process.chdir(__dirname);
 /**
  * kill any currently running instances, and take over
  */
@@ -33,8 +33,6 @@ fs.writeFile("pids.json", JSON.stringify([process.pid]), function(err) {
 });
 
 
-
-process.chdir(__dirname);
 
 var folders = require('./paths.json');
 var args = ['-f'];
